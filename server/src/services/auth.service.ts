@@ -11,7 +11,6 @@ export const registerUser = async ({ email, password, role }: any) => {
 
   // If role is student, create corresponding Student doc
   if (role === 'student') {
-    console.log('Creating student profile for user:', user._id);
     await Student.create({ user: user._id });
   }
 
