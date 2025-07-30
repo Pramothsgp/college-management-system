@@ -21,11 +21,11 @@ def train():
 def recognize():
     data = request.get_json()
     video_url_list = data.get("videoUrlList", [])
-    video_url = video_url_list[0] if isinstance(video_url_list, list) else video_url_list
-    pkl_urls = data.get("pklUrls")
+    pkl_objs = data.get("pklUrls", [])
 
-    result = recognize_faces(video_url, pkl_urls)
+    result = recognize_faces(video_url_list, pkl_objs)
     return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
