@@ -3,13 +3,14 @@ import { Worker } from 'bullmq';
 import axios from 'axios';
 import { redisConnection } from '../config/redis';
 
-new Worker(
+const attendanceWorker =  new Worker(
   'attendanceQueue',
   async job => {
     const { videoUrlList, pklUrls } = job.data;
-
+    console.log("url" , videoUrlList, pklUrls);
+    console.log('Processing job:', job.id);
     try {
-      const response = await axios.post('http://15.207.35.217:5001/recognize', {
+      const response = await axios.post(`${process.env.IMAGE_PROCESSOR_URL}/recognize`, {
         videoUrlList,
         pklUrls,
       });
@@ -26,3 +27,15 @@ new Worker(
   },
   { connection: redisConnection }
 );
+
+
+async function shutdown() {
+  console.log('Closing attendance worker...');
+  await attendanceWorker.close();  // This disconnects from Redis and stops processing
+  console.log('Attendance worker closed.');
+  process.exit(0);
+}
+
+// Listen for termination signals to close worker
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
