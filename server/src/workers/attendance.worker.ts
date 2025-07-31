@@ -2,13 +2,13 @@
 import { Worker } from 'bullmq';
 import axios from 'axios';
 import { redisConnection } from '../config/redis';
+import { Result } from 'ioredis';
+import { markAttendanceService } from '../services/attendance.service';
 
 const attendanceWorker =  new Worker(
   'attendanceQueue',
   async job => {
-    const { videoUrlList, pklUrls } = job.data;
-    console.log("url" , videoUrlList, pklUrls);
-    console.log('Processing job:', job.id);
+    const { videoUrlList, pklUrls , session , date} = job.data;
     try {
       const response = await axios.post(`${process.env.IMAGE_PROCESSOR_URL}/recognize`, {
         videoUrlList,
@@ -16,11 +16,16 @@ const attendanceWorker =  new Worker(
       });
 
       const result = response.data;
+      result[0].absent.forEach((id: string) => {
+        markAttendanceService({ studentId: id, date, sessions : {[session] : 'Absent'} });
+      });
 
-      // You can now save `result` into MongoDB for retrieval
-      console.log('Attendance result:', result);
+      result[0].present.forEach((id: string) => {
+        markAttendanceService({ studentId: id, date, sessions : {[session] : 'Present'} });
+      });
+
       // e.g., await AttendanceModel.create({ videoUrlList, pklUrls, result });
-
+      console.log('Attendance marked successfully:', job.id);
     } catch (err : any) {
       console.error('Failed to mark attendance:', err.message);
     }
