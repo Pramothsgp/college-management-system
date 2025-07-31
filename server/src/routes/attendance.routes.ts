@@ -6,5 +6,5 @@ const router = Router();
 
 router.post('/', verifyAuth, markAttendance);
 router.get('/:studentId', verifyAuth, getAttendance);
-router.post('/mark-attendance' , upload.array('videos') , markAttendanceController);
+router.post('/mark-attendance' ,verifyAuth, upload.array('videos') , markAttendanceController);
 export default router;
