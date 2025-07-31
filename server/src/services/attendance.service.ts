@@ -31,7 +31,7 @@ export const getAttendanceService = async (studentId: string) => {
 
 
 
-export const markAttendanceFromVideo = async (files: Express.Multer.File[]) => {
+export const markAttendanceFromVideo = async (files: Express.Multer.File[] , session: string, date: string) => {
   if (!files || files.length === 0) {
     throw new Error('No video files provided.');
   }
@@ -60,6 +60,8 @@ export const markAttendanceFromVideo = async (files: Express.Multer.File[]) => {
   const job = await attendanceQueue.add('mark-attendance', {
     videoUrlList,
     pklUrls,
+    session,
+    date,
   });
 
   // const result = await testMarkAttendanceDirectly(videoUrlList, pklUrls);
