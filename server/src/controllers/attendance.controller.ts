@@ -15,7 +15,11 @@ export const getAttendance = async (req: Request, res: Response) => {
 export const markAttendanceController = async (req: Request, res: Response) => {
   try {
     const files = req.files as Express.Multer.File[];
-    const result = await markAttendanceFromVideo(files);
+    const { session , date} = req.body;
+    if(!session || !date) {
+      return res.status(400).json({ error: 'Session and date are required.' });
+    }
+    const result = await markAttendanceFromVideo(files , session, date);
     res.json(result);
   } catch (error : any) {
     res.status(400).json({ error: error.message });
