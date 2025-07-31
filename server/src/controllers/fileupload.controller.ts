@@ -3,8 +3,8 @@ import { uploadFilesService } from '../services/fileupload.service';
 
 export const uploadFiles = async (req: Request, res: Response) => {
   const { files } = req;
-  const { userId } = req.params;
-
+  const user = (req as any).user;
+  const userId = user ? user.id : null;
   try {
     if (!files || !(files instanceof Array) || files.length === 0) {
       return res.status(400).json({ message: 'No files uploaded' });
