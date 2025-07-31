@@ -18,7 +18,14 @@ This server provides authentication, file upload, and attendance management endp
   - Response: `{ "token": "..." }`
 - **DELETE `/:userId`**
   - Response: `{ "message": "User deleted successfully" }`
-
+- **POST `/register-in-bulk`**
+  - **Authorization:** Bearer <token>
+  - Request: `{
+    "users" : ["727723euit162@skcet.ac.in" , "727723euit153@skcet.ac.in"],
+    "password" : "123123",
+    "role" : "student"
+}`
+  - Response: `{ "message": "Users registered successfully" }`
 ### File Upload (`/api/file-upload/upload/:userId`)
 - **POST** (multipart/form-data, files in `files[]`)
   - Response:
