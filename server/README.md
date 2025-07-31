@@ -7,6 +7,11 @@ This server provides authentication, file upload, and attendance management endp
 - MongoDB
 - AWS S3 (for file storage)
 
+## jwt token
+- All endpoints that require authentication use JWT tokens in the header.
+```
+Authorization : Bearer <token>
+```
 ## Main Endpoints
 
 ### Auth (`/api/auth`)
@@ -26,7 +31,8 @@ This server provides authentication, file upload, and attendance management endp
     "role" : "student"
 }`
   - Response: `{ "message": "Users registered successfully" }`
-### File Upload (`/api/file-upload/upload/:userId`)
+### File Upload (`/api/file-upload/upload/`)
+
 - **POST** (multipart/form-data, files in `files[]`)
   - Response:
     ```json
