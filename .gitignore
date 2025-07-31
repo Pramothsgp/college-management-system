@@ -163,3 +163,62 @@ android
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+faceenv310/
+env/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Output files
+recognize/detected_faces/
+*.log
+*.out
+
+# Training models and pickled data
+*.pkl
+*.joblib
+
+# HEIC to JPEG conversions (intermediate)
+*.jpeg-converted.jpg
+
+# Ignore video files (optional, or large files only)
+*.mp4
+*.avi
+*.mov
+
+# Ignore test results or debug files
+debug_output/
+debug.log
+
+# Ignore large datasets (optional)
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore student training images
+training/students/
+
+# Ignore source input images and videos
+recognize/src/
+
+
+# Ignore model and weight files
+*.dat
+*.bz2
+*.caffemodel
+*.prototxt
