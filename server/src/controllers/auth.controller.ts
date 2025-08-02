@@ -2,18 +2,41 @@ import { Request, Response } from 'express';
 import { registerUser, loginUser, deleteUser } from '../services/auth.service';
 
 export const register = async (req: Request, res: Response) => {
-  const data = await registerUser(req.body);
-  res.json(data);
+  const { email, password, role } = req.body;
+  if (!email || !password || !role) {
+    return res.status(400).json({ error: 'Email, password, and role are required.' });
+  }
+  if (role !== 'student' && role !== 'teacher' && role !== 'admin') {
+    return res.status(400).json({ error: 'Invalid role. Must be student, teacher, or admin.' });
+  }
+  try {
+    const data = await registerUser({ email, password, role });
+    res.json(data);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 export const login = async (req: Request, res: Response) => {
-  const data = await loginUser(req.body);
-  res.json(data);
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
+  try {
+    const data = await loginUser({ email, password });
+    res.json(data);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 export const removeUser = async (req: Request, res: Response) => {
-  const data = await deleteUser(req.params.userId);
-  res.json(data);
+  try {
+    const data = await deleteUser(req.params.userId);
+    res.json(data);
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 
