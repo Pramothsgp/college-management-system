@@ -25,6 +25,10 @@ export const markAttendanceService = async ({ studentId, date, sessions }: any) 
   }
 };
 
+
+export const getAttendanceOn = async (date: string) => {
+  return await Attendance.find({ date : date });
+};
 export const getAttendanceService = async (studentId: string) => {
   return await Attendance.find({ student: studentId });
 };
