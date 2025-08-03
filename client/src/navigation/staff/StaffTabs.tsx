@@ -3,6 +3,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import StaffDashboard from '~/screens/staff/StaffDashboard';
 import { View, Text } from 'react-native';
 import BottomTabsBar from '~/components/shared/BottomTabsBar';
+import Settings from '~/screens/shared/Settings';
+import HamburgerHeader from '~/components/shared/HamburgerHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,7 +13,7 @@ export default function StaffTabs() {
     <Tab.Navigator
       tabBar={(props) => <BottomTabsBar {...props} />}
       screenOptions={{
-        headerShown: false,
+        header: () => <HamburgerHeader />
       }}
     >
       <Tab.Screen
@@ -36,7 +38,7 @@ export default function StaffTabs() {
       />
       <Tab.Screen
         name="Settings"
-        component={() => <View className="flex-1 justify-center items-center"><Text>Settings</Text></View>}
+        component={Settings}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (

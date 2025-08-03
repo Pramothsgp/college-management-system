@@ -15,7 +15,7 @@ export default function StaffDrawer() {
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Home" component={StaffTabs} />
+      <Drawer.Screen name="Home" component={StaffTabs} options={{ headerShown: false }} />
       <Drawer.Screen name="Profile" component={() => <View><Text>Profile</Text></View>} />
       <Drawer.Screen name="Settings" component={() => <View><Text>Settings</Text></View>} />
       <Drawer.Screen name="Reports" component={() => <View><Text>Reports</Text></View>} />

@@ -9,7 +9,7 @@ const HamburgerHeader = () => {
 
   return (
     <View
-      className="flex-row items-center justify-between px-4 pt-2 pt-10 pb-4 bg-white dark:bg-black">
+      className="flex-row items-center justify-between px-4 pt-10 pb-4 bg-white dark:bg-black">
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
         <Text className="text-2xl text-black dark:text-white">☰</Text>
       </TouchableOpacity>
