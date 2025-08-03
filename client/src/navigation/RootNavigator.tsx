@@ -3,6 +3,7 @@ import AdminStack from './admin/AdminStack';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useAuth } from '~/context/AuthContext';
 import LoginScreen from '~/screens/auth/Login';
+import StaffDrawer from './staff/StaffDrawer';
 
 export default function RootNavigator() {
   const { role, isLoading } = useAuth();
@@ -13,9 +14,7 @@ export default function RootNavigator() {
       {role === 'admin' ? (
         <AdminStack />
       ) : role === 'staff' ? (
-        <View>
-          <Text>Staff Navigation</Text>
-        </View>
+        <StaffDrawer />
       ) : (
         <View>
           <Text>Student Navigation</Text>
