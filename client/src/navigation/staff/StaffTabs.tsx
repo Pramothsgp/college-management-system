@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StaffDashboard from '~/screens/staff/StaffDashboard';
-import { View, Text } from 'react-native';
 import BottomTabsBar from '~/components/shared/BottomTabsBar';
 import Settings from '~/screens/shared/Settings';
 import HamburgerHeader from '~/components/shared/HamburgerHeader';
+import AttendanceTabs from './AttendanceTabs';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,12 +27,12 @@ export default function StaffTabs() {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={() => <View className="flex-1 justify-center items-center"><Text>Staff Profile</Text></View>}
+        name="Attendance"
+        component={AttendanceTabs}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'Attendance',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+            <Ionicons name="calendar-outline" size={size} color={color} />
           ),
         }}
       />
